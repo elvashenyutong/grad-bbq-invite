@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import envelopeImg from "/src/assets/envelope.png";
 import partyImg from "/src/assets/balloons.png";
 import confettiImg from "/src/assets/confetti.png";
+
 
 export default function GraduationInvite() {
   const [opened, setOpened] = useState(false);
@@ -10,6 +11,16 @@ export default function GraduationInvite() {
   const [attendance, setAttendance] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+
+  const images = [1, 2, 3];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="bg-[#fdf4e3] min-h-screen p-6 flex flex-col items-center text-[#333]">
@@ -27,7 +38,7 @@ export default function GraduationInvite() {
             whileTap={{ scale: 0.95 }}
             onClick={() => setOpened(true)}
           />
-          <p className="mt-4 text-lg">Click the envelope to open your invitation 💌</p>
+          <p className="mt-4 text-lg text-center">Click the envelope to open your invitation 💌</p>
         </motion.div>
       ) : (
         <AnimatePresence>
@@ -44,31 +55,47 @@ export default function GraduationInvite() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              🎓 Elva & Hannah's Graduation Party 
+              🎓 🎓 🎓 
             </motion.h1>
+            <motion.h2
+              className="text-4xl font-bold text-[#d94f30] mb-6 text-center"
+              initial={{ opacity: 0, y: -40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              Elva & Hannah's Graduation Party 
+            </motion.h2>
 
+            {!submitted && (
             <img src={partyImg} alt="Party" className="w-32 mx-auto mb-4" />
+            )}
 
+            {!submitted && (
+              <div className="text-sm leading-relaxed text-[#444] mb-6">
+                <p className="mb-2">親愛的朋朋們</p>
+                <p className="mb-2">我們畢業啦！誠摯邀請你來參加我們的畢業泳池烤肉趴～</p>
+                <p className="mb-2">大家一起來吃吃喝喝、玩水、聊天、喝酒！</p>
+                <p className="mt-4">📍 地點：The Canterbury（我們家）泳池旁烤肉區</p>
+                <p>📅 日期：5月28日（三）</p>
+                <p>🕟 時間：下午4:30集合，5:00準時開烤！</p>
+                <p className="mt-4">🩱 泳池開放，歡迎自備泳具來玩水！</p>
+                <p>🍢 食材我們會統一準備，費用將依照人數平均分攤～</p>
+                <p className="mt-4">請務必來玩～～畢業就要跟你們一起慶祝💛</p>
+              </div>
+          )}
 
-            <div className="text-base leading-relaxed text-[#444] mb-6">
-              <p className="mb-2">親愛的朋朋們</p>
-              <p className="mb-2">我們畢業啦！誠摯邀請你來參加我們的畢業泳池烤肉趴～</p>
-              <p className="mb-2">大家一起來吃吃喝喝、玩水、聊天、喝酒！</p>
-              <p className="mt-4">📍 地點：The Canterbury（我們家）泳池旁烤肉區</p>
-              <p>📅 日期：5月28日（三）</p>
-              <p>🕟 時間：下午4:30集合，5:00準時開烤！</p>
-              <p className="mt-4">🩱 泳池開放，歡迎自備泳具來玩水！</p>
-              <p>🍢 食材我們會統一準備，費用將依照人數平均分攤～</p>
-              <p className="mt-4">請務必來玩～～畢業就要跟你們一起慶祝💛</p>
-            </div>
-
-            {/* <img src={partyImg} alt="Party" className="w-32 mx-auto mb-4" />
-
-            <p className="mb-2"><strong>Date:</strong> Wednesday, May 28</p>
-            <p className="mb-2"><strong>Time:</strong> 4:30 PM gather | 5:00 PM BBQ</p>
-            <p className="mb-2"><strong>Location:</strong> The Canterbury – poolside BBQ</p>
-            <p className="mb-2"><strong>Optional:</strong> Bring swimsuits!</p>
-            <p className="mb-4"><strong>Note:</strong> Food cost will be split evenly</p> */}
+            {!submitted && (
+              <div className="relative w-full aspect-[3/4] mb-6 overflow-hidden rounded-xl shadow-md">
+                {images.map((n, i) => (
+                  <motion.img
+                    key={n}
+                    src={`/src/assets/${n}.JPG`}
+                    alt={`Grad Photo ${n}`}
+                    className={`absolute top-0 left-0 w-full h-full object-cover rounded-xl transition-opacity duration-1500 ease-in-out ${i === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                  />
+                ))}
+              </div>
+            )}
 
             {!submitted ? (
               <form
@@ -157,6 +184,107 @@ export default function GraduationInvite() {
                 <img src={confettiImg} alt="Confetti" className="w-24 mx-auto mb-3" />
                 <p className="text-xl font-semibold">🎉 Thanks for your RSVP!</p>
                 <p className="mt-2">We can’t wait to see you there! 💖</p>
+
+                {submitted && (
+                  <div id="photo-grid" className="grid grid-cols-3 grid-rows-3 gap-2 mb-6">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, i) => (
+                    <motion.div
+                      key={n}
+                      className="relative overflow-hidden rounded-lg transition-all duration-300 aspect-square"
+                      onMouseEnter={(e) => {
+                        const container = document.getElementById("photo-grid");
+                        if (!container) return;
+
+                        
+
+                        const col = i % 3;
+                        const row = Math.floor(i / 3);
+                        const total = 9; // fix to expected total for layout control
+
+                        const isRightEdge = col === 2;
+                        const isLeftEdge = col === 0;
+                        const isBottomEdge = row === 2;
+                        const isTopEdge = row === 0;
+
+                        [...container.children].forEach((el, index) => {
+                          el.classList.remove(
+                            "col-span-1", "row-span-1",
+                            "col-span-2", "row-span-2",
+                            "z-20", "col-start-1", "col-start-2", "col-start-3",
+                            "row-start-1", "row-start-2", "row-start-3"
+                          );
+                          el.classList.add("col-span-1", "row-span-1");
+                        });
+
+                        const target = container.children[i];
+                        if (!target) return;
+
+                        if (i === 2 || i === 5 || i === 8) target.classList.add("col-start-2");
+                        if (i === 2) target.classList.add("row-start-1");
+                        if (i === 5) target.classList.add("row-start-2");
+                        if (i === 8) target.classList.add("row-start-3");
+
+
+                        target.classList.add("col-span-2", "row-span-2", "z-20");
+                      }}
+                      onMouseLeave={() => {
+                        const container = document.getElementById("photo-grid");
+                        if (!container) return;
+
+                        
+
+                        [...container.children].forEach((el) => {
+                          el.classList.remove("col-span-2", "row-span-2", "z-20", "col-start-1", "col-start-2", "col-start-3", "row-start-1", "row-start-2", "row-start-3");
+                          el.classList.add("col-span-1", "row-span-1");
+                        });
+                      }}
+                    >
+                      <img
+                        src={`/src/assets/${n}.JPG`}
+                        alt={`Photo ${n}`}
+                        className="object-cover w-full h-full transition duration-300 ease-in-out"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+)}
+
+
+                <div id="ticket" className="mt-6 px-6 py-4 bg-gradient-to-br from-[#fff8f3] to-[#ffe5d1] border border-[#d94f30] rounded-2xl max-w-md mx-auto text-[#333] shadow-xl text-left font-serif">
+                  <div className="border-b border-[#d94f30] mb-3 pb-2">
+                    <h2 className="text-base font-bold text-[#d94f30]">🎫 Graduation Party Pass</h2>
+                  </div>
+                  <p className="mb-1 text-xs">👤 <strong>Name:</strong> <span style={{ fontFamily: '"Dancing Script", cursive' }} className="text-xl">{name}</span></p>
+                  <p className="mb-1 text-xs">📅 <strong>Date:</strong> May 28 (Wed)</p>
+                  <p className="mb-1 text-xs">📍 <strong>Location:</strong> The Canterbury – Poolside</p>
+                  <p className="mb-1 text-xs">🕔 <strong>Time:</strong> 4:30 PM gather, 5:00 PM BBQ</p>
+                  <p className="mt-3 italic text-xs text-[#7a5549]">
+                    {attendance === "yes"
+                      ? "Get ready for fun in the sun, food, and celebration! ☀️🍢🎉"
+                      : "If your plans change, feel free to let us know. We’d still love to see you! 💛"}
+                  </p>
+                </div>
+                <div className="mt-4 print:hidden text-center">
+                  <button
+                    onClick={() => {
+                      const target = document.getElementById("ticket");
+                      if (!target) return;
+                      import("html2canvas").then((html2canvas) => {
+                        html2canvas.default(target).then((canvas) => {
+                          const link = document.createElement("a");
+                          link.download = `Graduation_Pass_${name}.png`;
+                          link.href = canvas.toDataURL();
+                          link.click();
+                        });
+                      });
+                    }}
+                    className="bg-[#d94f30] text-white px-4 py-2 rounded hover:bg-[#bb4025] text-sm"
+                  >
+                    📥 Save Ticket (Download)
+                  </button>
+                  
+                </div>
+
               </motion.div>
             )}
           </motion.div>
