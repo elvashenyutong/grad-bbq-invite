@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import envelopeImg from "/src/assets/envelope.png";
-import partyImg from "/src/assets/balloons.png";
-import confettiImg from "/src/assets/confetti.png";
+import envelopeImg from "/assets/envelope.png";
+import partyImg from "/assets/balloons.png";
+import confettiImg from "/assets/confetti.png";
 
 
 export default function GraduationInvite() {
@@ -85,13 +85,13 @@ export default function GraduationInvite() {
           )}
 
             {!submitted && (
-              <div className="relative w-full aspect-[3/4] mb-6 overflow-hidden rounded-xl shadow-md">
+              <div className="relative w-full h-full aspect-[3/4] mb-6 p-0 overflow-hidden shadow-md">
                 {images.map((n, i) => (
                   <motion.img
                     key={n}
-                    src={`/src/assets/${n}.JPG`}
+                    src={`/assets/${n}.JPG`}
                     alt={`Grad Photo ${n}`}
-                    className={`absolute top-0 left-0 w-full h-full object-cover rounded-xl transition-opacity duration-1500 ease-in-out ${i === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1500 ease-in-out ${i === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                   />
                 ))}
               </div>
@@ -240,7 +240,7 @@ export default function GraduationInvite() {
                       }}
                     >
                       <img
-                        src={`/src/assets/${n}.JPG`}
+                        src={`/assets/${n}.JPG`}
                         alt={`Photo ${n}`}
                         className="object-cover w-full h-full transition duration-300 ease-in-out"
                       />
