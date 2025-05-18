@@ -89,7 +89,7 @@ export default function GraduationInvite() {
                 {images.map((n, i) => (
                   <motion.img
                     key={n}
-                    src={`/assets/${n}.JPG`}
+                    src={`/assets/${n}.jpeg`}
                     alt={`Grad Photo ${n}`}
                     className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1500 ease-in-out ${i === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                   />
@@ -240,7 +240,7 @@ export default function GraduationInvite() {
                       }}
                     >
                       <img
-                        src={`/assets/${n}.JPG`}
+                        src={`/assets/${n}.jpeg`}
                         alt={`Photo ${n}`}
                         className="object-cover w-full h-full transition duration-300 ease-in-out"
                       />
