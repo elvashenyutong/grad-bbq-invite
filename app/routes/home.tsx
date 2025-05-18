@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import html2canvas from "html2canvas";
 import { motion, AnimatePresence } from "framer-motion";
 import envelopeImg from "/assets/envelope.png";
 import partyImg from "/assets/balloons.png";
@@ -11,6 +12,8 @@ export default function GraduationInvite() {
   const [attendance, setAttendance] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [ticketImageUrl, setTicketImageUrl] = useState<string | null>(null);
+  const ticketRef = useRef<HTMLDivElement>(null);
 
   const images = [
   { id: 1, src: new URL('/assets/1.jpeg', import.meta.url).href },
@@ -31,6 +34,29 @@ export default function GraduationInvite() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (submitted && name && ticketRef.current) {
+      const originalDisplay = ticketRef.current.style.display;
+      ticketRef.current.style.display = 'block';
+
+      html2canvas(ticketRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: null,
+      }).then((canvas) => {
+        setTicketImageUrl(canvas.toDataURL("image/png"));
+        if (ticketRef.current) {
+           ticketRef.current.style.display = 'none';
+        }
+      }).catch(err => {
+        console.error("Error generating ticket image:", err);
+        if (ticketRef.current) {
+          ticketRef.current.style.display = originalDisplay;
+        }
+      });
+    }
+  }, [submitted, name, attendance]);
 
   return (
     <div className="bg-[#fdf4e3] min-h-screen p-6 flex flex-col items-center text-[#333]">
@@ -260,39 +286,41 @@ export default function GraduationInvite() {
 )}
 
 
-                <div id="ticket" className="mt-6 px-6 py-4 bg-gradient-to-br from-[#fff8f3] to-[#ffe5d1] border border-[#d94f30] rounded-2xl max-w-md mx-auto text-[#333] shadow-xl text-left font-serif">
-                  <div className="border-b border-[#d94f30] mb-3 pb-2">
-                    <h2 className="text-base font-bold text-[#d94f30]">🎫 Graduation Party Pass</h2>
-                  </div>
-                  <p className="mb-1 text-xs">👤 <strong>Name:</strong> {name}</p>
-                  <p className="mb-1 text-xs">📅 <strong>Date:</strong> May 28 (Wed)</p>
-                  <p className="mb-1 text-xs">📍 <strong>Location:</strong> The Canterbury – Poolside</p>
-                  <p className="mb-1 text-xs">🕔 <strong>Time:</strong> 4:30 PM gather, 5:00 PM BBQ</p>
-                  <p className="mt-3 italic text-xs text-[#7a5549]">
-                    {attendance === "yes"
-                      ? "Get ready for fun in the sun, food, and celebration! ☀️🍢🎉"
-                      : "If your plans change, feel free to let us know. We’d still love to see you! 💛"}
-                  </p>
+                <div id="ticket-container" className="mt-6 max-w-md mx-auto w-full">
+                  {ticketImageUrl ? (
+                    <img src={ticketImageUrl} alt="Graduation Party Pass" className="w-full rounded-2xl shadow-xl" />
+                  ) : (
+                    <div 
+                      ref={ticketRef} 
+                      id="ticket" 
+                      className="px-6 py-4 bg-gradient-to-br from-[#fff8f3] to-[#ffe5d1] border border-[#d94f30] rounded-2xl text-[#333] shadow-xl text-left font-serif"
+                      style={{ display: submitted && name ? 'block' : 'none' }}
+                    >
+                      <div className="border-b border-[#d94f30] mb-3 pb-2">
+                        <h2 className="text-base font-bold text-[#d94f30]">🎫 Graduation Party Pass</h2>
+                      </div>
+                      <p className="mb-1 text-xs">👤 <strong>Name:</strong> {name}</p>
+                      <p className="mb-1 text-xs">📅 <strong>Date:</strong> May 28 (Wed)</p>
+                      <p className="mb-1 text-xs">📍 <strong>Location:</strong> The Canterbury – Poolside</p>
+                      <p className="mb-1 text-xs">🕔 <strong>Time:</strong> 4:30 PM gather, 5:00 PM BBQ</p>
+                      <p className="mt-3 italic text-xs text-[#7a5549]">
+                        {attendance === "yes"
+                          ? "Get ready for fun in the sun, food, and celebration! ☀️🍢🎉"
+                          : "If your plans change, feel free to let us know. We'd still love to see you! 💛"}
+                      </p>
+                    </div>
+                  )}
                 </div>
                 <div className="mt-4 print:hidden text-center">
-                  {/* <button
-                    onClick={() => {
-                      const target = document.getElementById("ticket");
-                      if (!target) return;
-                      import("html2canvas").then((html2canvas) => {
-                        html2canvas.default(target).then((canvas) => {
-                          const link = document.createElement("a");
-                          link.download = `Graduation_Pass_${name}.png`;
-                          link.href = canvas.toDataURL();
-                          link.click();
-                        });
-                      });
-                    }}
-                    className="bg-[#d94f30] text-white px-4 py-2 rounded hover:bg-[#bb4025] text-sm"
-                  >
-                    📥 Save Ticket (Download)
-                  </button> */}
-                  
+                  {ticketImageUrl && (
+                    <a
+                      href={ticketImageUrl}
+                      download={`Graduation_Pass_${name || 'Guest'}.png`}
+                      className="bg-[#d94f30] text-white px-4 py-2 rounded hover:bg-[#bb4025] text-sm inline-block"
+                    >
+                      📥 Save Ticket
+                    </a>
+                  )}
                 </div>
 
               </motion.div>
