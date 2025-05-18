@@ -134,20 +134,20 @@ export default function GraduationInvite() {
                 className="flex flex-col gap-4"
               >
                  <div>
-                  <p className="font-semibold mb-1">What's your name?</p>
+                  <p className="font-semibold mb-1 text-sm">What's your name?</p>
                   <input
                     type="text"
                     placeholder="Your Name"
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="border p-2 rounded"
+                    className="border p-2 rounded text-sm"
                   />
                  </div>
                 
 
                 <div>
-                  <p className="font-semibold mb-1">Will you attend?</p>
-                  <label className="flex items-center gap-2 mb-1">
+                  <p className="font-semibold mb-1 text-sm">Will you attend?</p>
+                  <label className="flex items-center gap-2 mb-1 text-sm">
                     <input
                       type="radio"
                       name="attendance"
@@ -158,7 +158,7 @@ export default function GraduationInvite() {
                     />
                     <span className={attendance === "yes" ? "text-green-700 font-semibold" : ""}>Yes – 🕺 Count me in! I’m ready to party!</span>
                                     </label>
-                                    <label className="flex items-center gap-2">
+                                    <label className="flex items-center gap-2 text-sm">
                     <input
                       type="radio"
                       name="attendance"
@@ -174,7 +174,7 @@ export default function GraduationInvite() {
 
                 <textarea
                   placeholder="Any message? (optional)"
-                  className="border p-2 rounded"
+                  className="border p-2 rounded text-sm"
                   onChange={(e) => setMessage(e.target.value)}
                   rows={3}
                 />
@@ -182,7 +182,7 @@ export default function GraduationInvite() {
                   type="submit"
                   className="bg-[#d94f30] text-white rounded p-2 font-semibold hover:bg-[#bb4025]"
                 >
-                  Submit RSVP
+                  Submit
                 </button>
               </form>
             ) : (
@@ -192,7 +192,7 @@ export default function GraduationInvite() {
                 animate={{ opacity: 1 }}
               >
                 <img src={confettiImg} alt="Confetti" className="w-24 mx-auto mb-3" />
-                <p className="text-xl font-semibold">🎉 Thanks for your RSVP!</p>
+                <p className="text-xl font-semibold">🎉 Thanks for your response!</p>
                 <p className="mt-2">We can’t wait to see you there! 💖</p>
 
                 {submitted && (
