@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 import { motion, AnimatePresence } from "framer-motion";
 import envelopeImg from "/assets/envelope.png";
 import partyImg from "/assets/balloons.png";
