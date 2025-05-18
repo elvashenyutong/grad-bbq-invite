@@ -312,6 +312,7 @@ export default function GraduationInvite() {
                   )}
                 </div>
                 <div className="mt-4 print:hidden text-center">
+                  <p className="mb-1 text-xs text-[#7a5549]"> Tap and hold to save the image.</p>
                   {ticketImageUrl && (
                     <a
                       href={ticketImageUrl}
