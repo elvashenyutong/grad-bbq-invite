@@ -12,7 +12,17 @@ export default function GraduationInvite() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
-  const images = [1, 2, 3];
+  const images = [
+  { id: 1, src: new URL('/assets/1.jpeg', import.meta.url).href },
+  { id: 2, src: new URL('/assets/2.jpeg', import.meta.url).href },
+  { id: 3, src: new URL('/assets/3.jpeg', import.meta.url).href },
+  { id: 4, src: new URL('/assets/4.jpeg', import.meta.url).href },
+  { id: 5, src: new URL('/assets/5.jpeg', import.meta.url).href },
+  { id: 6, src: new URL('/assets/6.jpeg', import.meta.url).href },
+  { id: 7, src: new URL('/assets/7.jpeg', import.meta.url).href },
+  { id: 8, src: new URL('/assets/8.jpeg', import.meta.url).href },
+  { id: 9, src: new URL('/assets/9.jpeg', import.meta.url).href },
+];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -86,11 +96,11 @@ export default function GraduationInvite() {
 
             {!submitted && (
               <div className="relative w-full h-full aspect-[3/4] mb-6 p-0 overflow-hidden shadow-md">
-                {images.map((n, i) => (
+                {images.map((img, i) => (
                   <motion.img
-                    key={n}
-                    src={`/assets/${n}.jpeg`}
-                    alt={`Grad Photo ${n}`}
+                    key={img.id}
+                    src={img.src}
+                    alt={`Grad Photo ${img.id}`}
                     className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1500 ease-in-out ${i === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                   />
                 ))}
@@ -187,9 +197,9 @@ export default function GraduationInvite() {
 
                 {submitted && (
                   <div id="photo-grid" className="grid grid-cols-3 grid-rows-3 gap-2 mb-6">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, i) => (
+                  {images.map((img, i) => (
                     <motion.div
-                      key={n}
+                      key={img.id}
                       className="relative overflow-hidden rounded-lg transition-all duration-300 aspect-square"
                       onMouseEnter={(e) => {
                         const container = document.getElementById("photo-grid");
@@ -240,8 +250,8 @@ export default function GraduationInvite() {
                       }}
                     >
                       <img
-                        src={`/assets/${n}.jpeg`}
-                        alt={`Photo ${n}`}
+                        src={img.src}
+                        alt={`Photo ${img}`}
                         className="object-cover w-full h-full transition duration-300 ease-in-out"
                       />
                     </motion.div>
