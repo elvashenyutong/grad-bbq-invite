@@ -264,7 +264,7 @@ export default function GraduationInvite() {
                   <div className="border-b border-[#d94f30] mb-3 pb-2">
                     <h2 className="text-base font-bold text-[#d94f30]">🎫 Graduation Party Pass</h2>
                   </div>
-                  <p className="mb-1 text-xs">👤 <strong>Name:</strong> <span style={{ fontFamily: '"Dancing Script", cursive' }} className="text-xl">{name}</span></p>
+                  <p className="mb-1 text-xs">👤 <strong>Name:</strong> {name}</p>
                   <p className="mb-1 text-xs">📅 <strong>Date:</strong> May 28 (Wed)</p>
                   <p className="mb-1 text-xs">📍 <strong>Location:</strong> The Canterbury – Poolside</p>
                   <p className="mb-1 text-xs">🕔 <strong>Time:</strong> 4:30 PM gather, 5:00 PM BBQ</p>
@@ -275,7 +275,7 @@ export default function GraduationInvite() {
                   </p>
                 </div>
                 <div className="mt-4 print:hidden text-center">
-                  <button
+                  {/* <button
                     onClick={() => {
                       const target = document.getElementById("ticket");
                       if (!target) return;
@@ -291,7 +291,7 @@ export default function GraduationInvite() {
                     className="bg-[#d94f30] text-white px-4 py-2 rounded hover:bg-[#bb4025] text-sm"
                   >
                     📥 Save Ticket (Download)
-                  </button>
+                  </button> */}
                   
                 </div>
 
