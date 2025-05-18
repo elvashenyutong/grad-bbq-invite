@@ -302,6 +302,7 @@ export default function GraduationInvite() {
                       <p className="mb-1 text-xs">👤 <strong>Name:</strong> {name}</p>
                       <p className="mb-1 text-xs">📅 <strong>Date:</strong> May 28 (Wed)</p>
                       <p className="mb-1 text-xs">📍 <strong>Location:</strong> The Canterbury – Poolside</p>
+                      <p className="mb-1 text-xs">🔐 <strong>Pool Code:</strong> 8856</p>
                       <p className="mb-1 text-xs">🕔 <strong>Time:</strong> 4:30 PM gather, 5:00 PM BBQ</p>
                       <p className="mt-3 italic text-xs text-[#7a5549]">
                         {attendance === "yes"
@@ -312,7 +313,7 @@ export default function GraduationInvite() {
                   )}
                 </div>
                 <div className="mt-4 print:hidden text-center">
-                  <p className="mb-1 text-xs text-[#7a5549]"> Tap and hold to save the image.</p>
+                  <p className="mb-1 text-xs text-[#7a5549]"> Tap and hold to save the pass.</p>
                   {ticketImageUrl && (
                     <a
                       href={ticketImageUrl}
