@@ -112,8 +112,8 @@ export default function GraduationInvite() {
                 <p className="mb-2">我們畢業啦！誠摯邀請你來參加我們的畢業泳池烤肉趴～</p>
                 <p className="mb-2">大家一起來吃吃喝喝、玩水、聊天、喝酒！</p>
                 <p className="mt-4">📍 地點：The Canterbury（我們家）泳池旁烤肉區</p>
-                <p>📅 日期：5月28日（三）</p>
-                <p>🕟 時間：下午4:30集合，5:00準時開烤！</p>
+                <p>📅 日期：7月3日（四）</p>
+                <p>🕟 時間：下午 5:00 準時開烤！</p>
                 <p className="mt-4">🩱 泳池開放，歡迎自備泳具來玩水！</p>
                 <p>🍢 食材我們會統一準備，費用將依照人數平均分攤～</p>
                 <p className="mt-4">請務必來玩～～畢業就要跟你們一起慶祝💛</p>
@@ -300,10 +300,10 @@ export default function GraduationInvite() {
                         <h2 className="text-base font-bold text-[#d94f30]">🎫 Graduation Party Pass</h2>
                       </div>
                       <p className="mb-1 text-xs">👤 <strong>Name:</strong> {name}</p>
-                      <p className="mb-1 text-xs">📅 <strong>Date:</strong> May 28 (Wed)</p>
+                      <p className="mb-1 text-xs">📅 <strong>Date:</strong> July 3 (Thu)</p>
                       <p className="mb-1 text-xs">📍 <strong>Location:</strong> The Canterbury – Poolside</p>
                       <p className="mb-1 text-xs">🔐 <strong>Pool Code:</strong> 8856</p>
-                      <p className="mb-1 text-xs">🕔 <strong>Time:</strong> 4:30 PM gather, 5:00 PM BBQ</p>
+                      <p className="mb-1 text-xs">🕔 <strong>Time:</strong> 5:00 PM</p>
                       <p className="mt-3 italic text-xs text-[#7a5549]">
                         {attendance === "yes"
                           ? "Get ready for fun in the sun, food, and celebration! ☀️🍢🎉"
